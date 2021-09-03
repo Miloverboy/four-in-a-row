@@ -1,2 +1,2 @@
-# Four In A Row
+# Four In A Row assignment AI: Principles & Techniques
 
