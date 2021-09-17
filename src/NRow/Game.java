@@ -45,6 +45,8 @@ public class Game {
     } else {
       System.out.println("Player " + players[winner - 1] + " won!");
     }
+    System.out.println("Player " + players[0] + " evaluated a boardstate " + players[0].getEvalCount() + " times.");
+    System.out.println("Player " + players[1] + " evaluated a boardstate " + players[1].getEvalCount() + " times.");
     return winner;
   }
 

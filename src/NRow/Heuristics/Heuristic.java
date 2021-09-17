@@ -7,9 +7,17 @@ import NRow.Board;
  */
 public abstract class Heuristic {
     protected int gameN;
+    protected int evalCount = 0;
 
     public Heuristic(int gameN) {
         this.gameN = gameN;
+    }
+
+    /**
+     * @return The amount of times a boardstate was evaluated
+     */
+    public int getEvalCount() {
+        return evalCount;
     }
 
     /**
@@ -50,9 +58,21 @@ public abstract class Heuristic {
      */
     protected int evaluateAction(int player, int action, Board board) {
         if (board.isValid(action)) {
-            int value = evaluate(player, board.getNewBoard(action, player));
+            evalCount++;
+            int value = evaluateBoard(player, board.getNewBoard(action, player));
             return value;
         } else return Integer.MIN_VALUE;
+    }
+
+    /**
+     * Helper function to assign a utility to a board
+     * @param player the player for which to compute the heuristic values
+     * @param board the board to evaluate
+     * @return the utility
+     */
+    public int evaluateBoard(int player, Board board) {
+        evalCount++;
+        return evaluate(player, board);
     }
 
     public String toString() {
@@ -67,5 +87,5 @@ public abstract class Heuristic {
      * @param board the board to evaluate
      * @return heuristic value for the board state
      */
-    public abstract int evaluate(int player, Board board);
+    protected abstract int evaluate(int player, Board board);
 }

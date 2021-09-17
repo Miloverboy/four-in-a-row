@@ -18,7 +18,7 @@ public class SimpleHeuristic extends Heuristic {
      * Determine utility of a board state
      */
     @Override
-    public int evaluate(int player, Board board) {
+    protected int evaluate(int player, Board board) {
         int[][] boardState = board.getBoardState();
         int winning = Game.winning(boardState, this.gameN);
         if(winning == player) {

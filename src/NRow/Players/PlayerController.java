@@ -24,6 +24,13 @@ public abstract class PlayerController {
   }
 
   /**
+   * @return The amount of times the heuristic was used to evaluate a boardstate
+   */
+  public int getEvalCount() {
+    return heuristic.getEvalCount();
+  }
+
+  /**
    * Get a nice String representation for displaying the board
    */
   @Override
