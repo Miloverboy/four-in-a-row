@@ -26,7 +26,7 @@ public class MinMaxPlayer extends PlayerController {
         // Example: 
         int maxValue = Integer.MIN_VALUE;
         int maxMove = 0;
-        for(int i = 0; i < gameN; i++) { //for each of the possible moves
+        for(int i = 0; i < board.width; i++) { //for each of the possible moves
             if(board.isValid(i)) { //if the move is valid
                 Board newBoard = board.getNewBoard(i, playerId); // Get a new board resulting from that move
                 int value = heuristic.evaluateBoard(playerId, newBoard); //evaluate that new board to get a heuristic value from it
