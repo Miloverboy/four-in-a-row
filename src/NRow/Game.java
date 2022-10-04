@@ -22,6 +22,16 @@ public class Game {
     this.gameBoard = new Board(boardWidth, boardHeight);
   }
 
+  public void testBoard() {
+    int currentPlayer = 0;
+    BoardTree test = new BoardTree(null, gameBoard, currentPlayer);
+    for (int i = 0; i < 3; i++) {
+      test.createChildren();
+      test = test.getChildren().get(1);
+      System.out.println(test.getBoard());
+    }
+  }
+
   /**
    * Starts the game
    * @return the playerId of the winner
