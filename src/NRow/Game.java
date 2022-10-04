@@ -22,6 +22,29 @@ public class Game {
     this.gameBoard = new Board(boardWidth, boardHeight);
   }
 
+  public void testGame() {
+    int currentPlayer = 0;
+    State state = new State(gameBoard, currentPlayer);
+    Node node = new Node(state, null);
+
+    node.createChildren();
+    node = node.getChildren().get(0);
+
+    node.createChildren();
+    node = node.getChildren().get(0);
+
+    node.createChildren();
+    node = node.getChildren().get(0);
+
+    node.createChildren();
+    node = node.getChildren().get(0);
+
+    node.createChildren();
+    node = node.getChildren().get(0);
+    
+    System.out.println(node.getState().getBoard());
+  }
+
   /**
    * Starts the game
    * @return the playerId of the winner

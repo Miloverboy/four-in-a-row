@@ -13,7 +13,8 @@ public class App {
         PlayerController[] players = getPlayers(gameN);
 
         Game game = new Game(gameN, boardWidth, boardHeight, players);
-        game.startGame();
+        //game.startGame();
+        game.testGame();
     }
 
     /**

@@ -9,5 +9,14 @@ public class State {
         this.player= player;
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
+    public int getPlayer() {
+        return player;
+    }
+
+
 
 }
