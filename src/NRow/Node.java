@@ -2,18 +2,21 @@ package NRow;
 
 import java.util.LinkedList;
 import java.util.List;
+import NRow.Heuristics.SimpleHeuristic;
+
+import NRow.Heuristics.Heuristic;
 
 public class Node {
     State state;
     Node parent;
     List<Node> children;
 
-
     public Node (State state, Node parent){
         this.state= state;
         this.parent= parent;
         this.children= new LinkedList<Node>(); 
     }
+
     public State getState(){
         return state;
     }
@@ -67,5 +70,29 @@ public class Node {
             }
         } else
             System.out.println(this.getState().getBoard()); 
+    }
+
+    /*
+            int[] utilities = evalActions(player, board);
+            int bestAction = 0;
+            for (int i = 0; i < utilities.length; i++) {
+                bestAction = utilities[i] > utilities[bestAction] ? i : bestAction;*/
+
+    public void maximise() {
+
+        //remove:
+        Heuristic heuristic = new SimpleHeuristic(4);
+
+        if (this.children.size() == 0) {
+            state.setAlpha(heuristic.evaluateBoard(state.getPlayer(), state.getBoard()));
+        }
+        
+        for (int i = 0; i < this.children.size(); i++) {
+
+        }
+    }
+
+    public void minimise() {
+
     }
 }

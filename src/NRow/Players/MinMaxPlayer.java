@@ -2,6 +2,8 @@ package NRow.Players;
 
 import NRow.Board;
 import NRow.Heuristics.Heuristic;
+import NRow.Tree;
+import NRow.State;
 
 public class MinMaxPlayer extends PlayerController {
     private int depth;
@@ -23,6 +25,10 @@ public class MinMaxPlayer extends PlayerController {
         // HINT: use the functions on the 'board' object to produce a new board given a specific move
         // HINT: use the functions on the 'heuristic' object to produce evaluations for the different board states!
         
+        State state = new State(gameBoard, 0);
+        Tree tree = new Tree(state);
+        tree.createTree(3);
+
         // Example: 
         int maxValue = Integer.MIN_VALUE;
         int maxMove = 0;
