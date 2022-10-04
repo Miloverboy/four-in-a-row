@@ -34,12 +34,22 @@ public class Node {
         this.parent= newParent;
     }
 
-    public void createChildren() {
-        int nextPlayer = (this.state.getPlayer() == 0) ? 1 : 0;
+    public void createChildren(int depth) {
+        int previousPlayer = this.state.getPlayer();
+        int nextPlayer;
+        if (previousPlayer == 0)
+            nextPlayer = 1;
+        else if (previousPlayer == 1)
+            nextPlayer = 2;
+        else 
+            nextPlayer = 1;
         Board parentBoard = this.state.getBoard();
         Node child;
         State newState;
         Board newBoard;
+
+        // create all children/possible boards if they are valid.
+
         for (int i = 0; i < parentBoard.width; i++) {
             if (parentBoard.isValid(i)) {
                 newBoard = parentBoard.getNewBoard(i, nextPlayer);
@@ -48,5 +58,14 @@ public class Node {
                 this.children.add(child);
             }
         }
+
+        // recursively create children of children, if max depth isn't reached.
+
+        if (depth > 0) {
+            for (int i = 0; i < this.children.size(); i++) {
+                children.get(i).createChildren(depth-1);
+            }
+        } else
+            System.out.println(this.getState().getBoard()); 
     }
 }

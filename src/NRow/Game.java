@@ -23,27 +23,32 @@ public class Game {
   }
 
   public void testGame() {
-    int currentPlayer = 0;
-    State state = new State(gameBoard, currentPlayer);
-    Node node = new Node(state, null);
 
-    node.createChildren();
-    node = node.getChildren().get(0);
-
-    node.createChildren();
-    node = node.getChildren().get(0);
-
-    node.createChildren();
-    node = node.getChildren().get(0);
-
-    node.createChildren();
-    node = node.getChildren().get(0);
-
-    node.createChildren();
-    node = node.getChildren().get(0);
-    
-    System.out.println(node.getState().getBoard());
+    State state = new State(gameBoard, 0);
+    Tree tree = new Tree(state);
+    tree.createTree(3);
   }
+
+    
+    /*Node node = new Node(state, null);
+
+    node.createChildren();
+    node = node.getChildren().get(0);
+
+    node.createChildren();
+    node = node.getChildren().get(3);
+
+    node.createChildren();
+    node = node.getChildren().get(6);
+
+    node.createChildren();
+    node = node.getChildren().get(1);
+
+    node.createChildren();
+    node = node.getChildren().get(1);
+    
+    System.out.println(node.getState().getBoard()); 
+  } */
 
   /**
    * Starts the game
