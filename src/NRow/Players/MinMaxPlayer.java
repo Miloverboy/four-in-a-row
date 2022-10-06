@@ -5,10 +5,15 @@ import java.util.List;
 
 import NRow.Board;
 import NRow.Heuristics.Heuristic;
+<<<<<<< HEAD
 import NRow.Heuristics.SimpleHeuristic;
 import NRow.Node;
 import NRow.State;
 
+=======
+import NRow.Tree;
+import NRow.State;
+>>>>>>> 646dc487f5452bef607f0480b251cdaeaa20177d
 
 public class MinMaxPlayer extends PlayerController {
     private int depth;
@@ -94,6 +99,10 @@ public int min(Board board, int depth){
         // HINT: use the functions on the 'board' object to produce a new board given a specific move
         // HINT: use the functions on the 'heuristic' object to produce evaluations for the different board states!
         
+        State state = new State(gameBoard, 0);
+        Tree tree = new Tree(state);
+        tree.createTree(3);
+
         // Example: 
         int maxMove = 0;
         int depth = 4;
