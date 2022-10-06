@@ -1,5 +1,8 @@
 package NRow;
 
+import NRow.Heuristics.Heuristic;
+import NRow.Heuristics.SimpleHeuristic;
+import NRow.Heuristics.SmartHeuristic;
 import NRow.Players.PlayerController;
 
 public class Game {
@@ -22,11 +25,28 @@ public class Game {
     this.gameBoard = new Board(boardWidth, boardHeight);
   }
 
+  
+
   public void testGame() {
 
+    State TestBoard;
     State state = new State(gameBoard, 0);
     Tree tree = new Tree(state);
     tree.createTree(3);
+
+    // Create a testing board, a board after a few moves.
+
+    Node tTree = tree.root.getChildren().get(0).getChildren().get(0).getChildren().get(1);
+    tTree.createChildren(4);
+    tTree = tTree.getChildren().get(1).getChildren().get(0).getChildren().get(1).getChildren().get(2);
+    System.out.println(tTree.getState().getBoard());
+
+    SimpleHeuristic siH = new SimpleHeuristic(gameN);
+    SmartHeuristic saH = new SmartHeuristic(gameN);
+    System.out.println(saH.evaluateBoard(1, tTree.getState().getBoard()));
+
+
+    //tTree.createChildren();
   }
 
     

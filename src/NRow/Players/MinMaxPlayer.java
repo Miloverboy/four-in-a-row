@@ -5,15 +5,10 @@ import java.util.List;
 
 import NRow.Board;
 import NRow.Heuristics.Heuristic;
-<<<<<<< HEAD
 import NRow.Heuristics.SimpleHeuristic;
 import NRow.Node;
 import NRow.State;
-
-=======
 import NRow.Tree;
-import NRow.State;
->>>>>>> 646dc487f5452bef607f0480b251cdaeaa20177d
 
 public class MinMaxPlayer extends PlayerController {
     private int depth;
@@ -28,7 +23,7 @@ public class MinMaxPlayer extends PlayerController {
     public int max(Board board, int depth){
         int maxValue = 0;
         Node node = new Node(new State(board,1), null);
-        node.createChildren();
+        node.createChildren(1);
         List<Node> children = new ArrayList<>();
         children.addAll(node.getChildren());
         if(depth == 0){
@@ -60,7 +55,7 @@ public class MinMaxPlayer extends PlayerController {
 public int min(Board board, int depth){
     int minValue = 9999;
     Node node = new Node(new State(board,2), null);
-    node.createChildren();
+    node.createChildren(1);
     List<Node> children = new ArrayList<>();
     children.addAll(node.getChildren());
     if(depth == 0){
@@ -99,7 +94,7 @@ public int min(Board board, int depth){
         // HINT: use the functions on the 'board' object to produce a new board given a specific move
         // HINT: use the functions on the 'heuristic' object to produce evaluations for the different board states!
         
-        State state = new State(gameBoard, 0);
+        State state = new State(board, 0);
         Tree tree = new Tree(state);
         tree.createTree(3);
 
@@ -109,12 +104,13 @@ public int min(Board board, int depth){
         int maxValue =0;
         int counter =0;
         Node node = new Node(new State(board,0), null);
-        node.createChildren();
+        node.createChildren(1);
         List<Node> children = new ArrayList<>();
         children.addAll(node.getChildren());
         //Create children of a node based on the current board
         // If no moves have been made, then it means that player 1 (the maximiser will start)
-        if (board.getMovesCount() == 0){
+
+        if (this.playerId == 0){
             for(Node n: children){
                 //check for the best child and make the move based that
                 int eval= min(n.getState().getBoard(),depth);
@@ -126,20 +122,9 @@ public int min(Board board, int depth){
             }
         }
         // If an even number of moves have been made, then it means that player 1 (the maximiser will play a move)
-        else if (board.getMovesCount() % 2 == 0){
+        else if (this.playerId == 1){
             for(Node n: children){
                 int eval= min(n.getState().getBoard(),depth);
-                if (eval>maxValue){
-                    eval=maxValue; 
-                    maxMove=counter;
-                }
-                counter++;
-            }
-        }
-        else{
-            // If an odd number of moves have been made, then it means that player 2 (the minimiser will play a move)
-            for(Node n: children){
-                int eval= max(n.getState().getBoard(),depth);
                 if (eval>maxValue){
                     eval=maxValue; 
                     maxMove=counter;

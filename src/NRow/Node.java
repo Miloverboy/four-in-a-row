@@ -68,8 +68,7 @@ public class Node {
             for (int i = 0; i < this.children.size(); i++) {
                 children.get(i).createChildren(depth-1);
             }
-        } else
-            System.out.println(this.getState().getBoard()); 
+        }  
     }
 
     /*
