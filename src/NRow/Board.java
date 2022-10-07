@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Board {
   public final int width;
   public final int height;
+  public int movesCount; // counts how many moves have been made so far on this board
   private int[][] boardState; // 2D integer array containing 0's, or else playerId's in case a spot has been claimed
 
   /**
@@ -16,6 +17,7 @@ public class Board {
     this.width = width;
     this.height = height;
     this.boardState = new int[width][height];
+    this.movesCount = 0;
   }
 
   /**
@@ -36,6 +38,15 @@ public class Board {
     this.height = state[0].length;
     this.boardState = state;
   }
+
+  public void moveCountAdd (){
+    this.movesCount = movesCount + 1;
+  }
+
+  public int getMovesCount (){
+    return movesCount;
+  }
+
 
   /**
    * @param x

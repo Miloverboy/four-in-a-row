@@ -14,7 +14,7 @@ public class App {
 
         Game game = new Game(gameN, boardWidth, boardHeight, players);
         //game.startGame();
-        game.testGame();
+        System.out.println("het");
     }
 
     /**

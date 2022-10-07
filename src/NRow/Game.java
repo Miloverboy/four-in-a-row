@@ -46,29 +46,10 @@ public class Game {
     System.out.println(saH.evaluateBoard(1, tTree.getState().getBoard()));
 
 
-    //tTree.createChildren();
   }
 
     
-    /*Node node = new Node(state, null);
 
-    node.createChildren();
-    node = node.getChildren().get(0);
-
-    node.createChildren();
-    node = node.getChildren().get(3);
-
-    node.createChildren();
-    node = node.getChildren().get(6);
-
-    node.createChildren();
-    node = node.getChildren().get(1);
-
-    node.createChildren();
-    node = node.getChildren().get(1);
-    
-    System.out.println(node.getState().getBoard()); 
-  } */
 
   /**
    * Starts the game

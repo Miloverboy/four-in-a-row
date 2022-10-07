@@ -2,6 +2,7 @@ package NRow;
 
 public class Tree {
     Node root;
+    
 
     public Tree(State state) {
         root = new Node(state, null);
@@ -10,5 +11,9 @@ public class Tree {
     public void createTree(int depth) {
         root.createChildren(depth);
         
+    }
+
+    public Node getRoot() {
+        return this.root;
     }
 }

@@ -2,6 +2,7 @@ package NRow.Players;
 
 import NRow.Board;
 import NRow.Heuristics.Heuristic;
+import NRow.Node;
 
 /**
  * Abstract class defining Player

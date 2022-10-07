@@ -99,11 +99,10 @@ public int min(Board board, int depth){
         tree.createTree(3);
 
         // Example: 
+        Node node = new Node(new State(board,2), null);
         int maxMove = 0;
-        int depth = 4;
         int maxValue =0;
         int counter =0;
-        Node node = new Node(new State(board,0), null);
         node.createChildren(1);
         List<Node> children = new ArrayList<>();
         children.addAll(node.getChildren());
@@ -140,5 +139,6 @@ public int min(Board board, int depth){
 
         return maxMove;
     }
+    
     
 }

@@ -1,18 +1,13 @@
 package NRow;
 
 public class State {
-    private static final int MIN_VALUE = -2147483648;
-    private static final int MAX_VALUE = 2147483647;
     Board board;
     int player;
-    int alpha;
-    int beta;
+    int value;
 
     public State (Board board, int player){
         this.board= board;
         this.player= player;
-        this.alpha= MIN_VALUE;
-        this.beta= MAX_VALUE;
     }
 
     public Board getBoard() {
@@ -23,14 +18,13 @@ public class State {
         return player;
     }
 
-    public void setAlpha(int alpha){
-        this.alpha = alpha;
+    public void setValue(int value){
+        this.value=value;
     }
 
-    public void setBeta(int beta){
-        this.beta = beta;
+    public int getValue(){
+        return this.value;
     }
-
 
 
 }
