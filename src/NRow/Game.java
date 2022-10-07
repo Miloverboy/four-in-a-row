@@ -23,6 +23,14 @@ public class Game {
     this.gameN = gameN;
     this.players = players;
     this.gameBoard = new Board(boardWidth, boardHeight);
+    //this.gameBoard = createTestBoard(gameBoard);
+  }
+
+  public Board createTestBoard(Board board) {
+    board.play(1, 2);
+    board.play(2, 2);
+    board.play(0, 2);
+    return board;
   }
 
   
@@ -83,9 +91,13 @@ public class Game {
       gameBoard.play(players[currentPlayer].makeMove(gameBoard), players[currentPlayer].playerId);
       System.out.println(gameBoard);
       try { 
-        Thread.sleep(500); 
+        Thread.sleep(00); 
       } catch(InterruptedException e) {
         System.out.println(e);
+      }
+
+      if (gameBoard.getValue(1, 3) != 0) {
+        int x = 0;
       }
       
       // other player can make a move now
@@ -93,7 +105,7 @@ public class Game {
     }
 
 
-    System.out.println(gameBoard);
+    //System.out.println(gameBoard);
     if(winner < 0) {
       System.out.println("Game is a draw!");
     } else {

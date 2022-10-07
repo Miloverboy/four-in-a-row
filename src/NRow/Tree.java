@@ -11,4 +11,8 @@ public class Tree {
         root.createChildren(depth);
         
     }
+
+    public Node getRoot() {
+        return this.root;
+    }
 }

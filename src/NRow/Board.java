@@ -36,6 +36,7 @@ public class Board {
     this.height = state[0].length;
     this.boardState = state;
   }
+  
 
   /**
    * @param x

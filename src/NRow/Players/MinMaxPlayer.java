@@ -23,11 +23,11 @@ public class MinMaxPlayer extends PlayerController {
 
     public int minimax(Node node, int depth, boolean maximizingPlayer) {
         int bestDepth = depth;
-        if (depth == 0 || node.getChildren() == null) {
+        if (depth == 0 || node.getChildren().size() == 0) {
             return this.heuristic.evaluateBoard(node.getState().getPlayer(), node.getState().getBoard());
         }
         if (maximizingPlayer) {
-            int bestValue = Integer.MIN_VALUE + 100;
+            int bestValue = Integer.MIN_VALUE + 1000;
             int currentValue;
             for (Node n: node.getChildren()) {
                 currentValue = minimax(n, depth - 1, false);
@@ -35,17 +35,17 @@ public class MinMaxPlayer extends PlayerController {
                     bestValue = currentValue;
                     bestDepth = n.getMaxDepth();
                     node.getState().setBestMove(n.getState().getPrevMove());
-                }
+                }/*
                 if (currentValue == bestValue && n.getMaxDepth() < bestDepth) {
                     bestDepth = n.getMaxDepth();
                     bestValue = currentValue;
                     node.getState().setBestMove(n.getState().getPrevMove());
-                }
+                }*/
             }
             return bestValue;
 
         } else {
-            int bestValue = Integer.MAX_VALUE - 100;
+            int bestValue = Integer.MAX_VALUE - 1000;
             int currentValue;
             for (Node n: node.getChildren()) {
                 currentValue = minimax(n, depth - 1, true);
@@ -54,97 +54,15 @@ public class MinMaxPlayer extends PlayerController {
                     bestDepth = n.getMaxDepth();
                     node.getState().setBestMove(n.getState().getPrevMove());
                 }
-                if (currentValue == bestValue && n.getMaxDepth() < bestDepth) {
+                /*if (currentValue == bestValue && n.getMaxDepth() < bestDepth) {
                     bestDepth = n.getMaxDepth();
                     bestValue = currentValue;
                     node.getState().setBestMove(n.getState().getPrevMove());
-                }
-            }
+                }*/
+            } 
             return bestValue;
         }
     }
-
-    /*public Node max(Node node, int depth){
-        int maxValue = Integer.MIN_VALUE + 100;
-        Node maxNode = null;
-        List<Node> children = node.getChildren();
-
-        // if there are no children, return itself.
-
-        if (children == null) {
-            return node;
-        }
-
-        if(depth <= 1){
-            // if we reached the final layer we wanna reach, we make simple eval and return the best one
-            for (Node n: children) {
-                int eval = this.heuristic.evaluateBoard(node.getState().getPlayer(), n.getState().getBoard());
-                n.getState().setAlpha(eval);
-                System.out.print(eval + " ");
-                if (eval > maxValue){
-                        maxValue = eval; 
-                        maxNode = n;
-                    }
-                }
-
-            System.out.println(" Best value (max): " + maxValue);
-        
-            return maxNode;
-        }
-        else {
-            //if there are still more depths to discover we make a move based on what the minimizer would ideally do in his next move
-            //based on all the possible moves we have 
-
-            
-            
-            for (Node n: children) {
-                n = min(n, depth-1);
-                int eval = n.getState().getAlpha();
-                if (eval > maxValue){
-                    maxValue = eval;
-                    maxNode = n;
-                }
-            }
-            return maxNode;
-       }
-}
-
-public Node min(Node node, int depth){
-    int minValue = Integer.MAX_VALUE - 100;
-    Node minNode = null;
-    if(depth == 0){
-        // if we reached the final layer we wanna reach, we make simple eval and return the best one
-        for (Node n: node.getChildren()) {
-            int eval = this.heuristic.evaluateBoard(node.getState().getPlayer(), n.getState().getBoard());
-            n.getState().setBeta(eval);
-            System.out.print(eval + " ");
-            if (eval < minValue){
-                    minValue = eval; 
-                    minNode = n;
-                }
-            }
-
-        System.out.println(" Best value (min): " + minValue);
-    
-        return minNode;
-    }
-    else {
-        
-        //if there are still more depths to discover we make a move based on what the maximizer would ideally do in his next move 
-        //based on all the possible moves we have 
-
-        node.createChildren(depth);
-
-        for (Node n: node.getChildren()) {
-            int eval = n.getState().getBeta();
-            if (eval < minValue){
-                minValue = eval;
-                minNode = n;
-            }
-        }
-        return minNode;
-   }
-}
 
     /**
    * Implement this method yourself!
@@ -163,18 +81,16 @@ public Node min(Node node, int depth){
 
         // Example: 
         int maxMove = 0;
-        int depth = 4;
         int maxValue =0;
         int counter =0;
-        Node node = new Node(startState, null);
-        node.createChildren(3);
-        List<Node> children = new ArrayList<>();
-        children.addAll(node.getChildren());
+        Node node = tree.getRoot();
+
         //Create children of a node based on the current board
         // If no moves have been made, then it means that player 1 (the maximiser will start)
 
-        int goal = minimax(node, 3, true);
+        int goal = minimax(node, depth, true);
         maxMove = node.getState().getbestMove();
+        System.out.println(goal);
         
         //System.out.println(goal);
 
