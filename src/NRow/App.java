@@ -40,7 +40,7 @@ public class App {
         //TODO: Implement other PlayerControllers (MinMax, AlphaBeta)
 
         //PlayerController[] players = { human, human2 };
-        PlayerController[] players = { minMax1, minMax2 };
+        PlayerController[] players = { minMax1, human2 };
 
         return players;
     }

@@ -30,7 +30,7 @@ public class Game {
   public void testGame() {
 
     State TestBoard;
-    State state = new State(gameBoard, 0, -1);
+    State state = new State(gameBoard, 0, -1, 4);
     Tree tree = new Tree(state);
     tree.createTree(3);
 
@@ -83,7 +83,7 @@ public class Game {
       gameBoard.play(players[currentPlayer].makeMove(gameBoard), players[currentPlayer].playerId);
       System.out.println(gameBoard);
       try { 
-        Thread.sleep(2000); 
+        Thread.sleep(500); 
       } catch(InterruptedException e) {
         System.out.println(e);
       }

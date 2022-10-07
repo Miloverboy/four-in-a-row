@@ -3,6 +3,7 @@ package NRow;
 public class State {
     private static final int MIN_VALUE = -2147483648;
     private static final int MAX_VALUE = 2147483647;
+    int gameN;
     Board board;
     int player;
     int alpha;
@@ -10,7 +11,7 @@ public class State {
     int prevMove;
     int bestMove;
 
-    public State (Board board, int player, int prevMove){
+    public State (Board board, int player, int prevMove, int gameN){
         this.board= board;
         this.player= player;
         this.alpha= MIN_VALUE;
@@ -52,6 +53,10 @@ public class State {
 
     public int getPrevMove(){
         return this.prevMove;
+    }
+
+    public int getGameN(){
+        return this.gameN;
     }
 
 

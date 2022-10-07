@@ -38,6 +38,9 @@ public class Node {
     }
 
     public void createChildren(int depth) {
+        if (Game.winning(this.getState().getBoard().getBoardState(), 4) != 0) {
+            return;
+        }
         int previousPlayer = this.state.getPlayer();
         int nextPlayer;
         if (previousPlayer == 0)
@@ -56,7 +59,7 @@ public class Node {
         for (int i = 0; i < parentBoard.width; i++) {
             if (parentBoard.isValid(i)) {
                 newBoard = parentBoard.getNewBoard(i, nextPlayer);
-                newState = new State(newBoard, nextPlayer, i);
+                newState = new State(newBoard, nextPlayer, i, this.getState().getGameN());
                 child = new Node(newState, this);
                 this.children.add(child);
             }

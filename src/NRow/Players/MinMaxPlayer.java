@@ -22,6 +22,7 @@ public class MinMaxPlayer extends PlayerController {
     }
 
     public int minimax(Node node, int depth, boolean maximizingPlayer) {
+        int bestDepth = depth;
         if (depth == 0 || node.getChildren() == null) {
             return this.heuristic.evaluateBoard(node.getState().getPlayer(), node.getState().getBoard());
         }
@@ -30,8 +31,14 @@ public class MinMaxPlayer extends PlayerController {
             int currentValue;
             for (Node n: node.getChildren()) {
                 currentValue = minimax(n, depth - 1, false);
-                bestValue = Math.max(currentValue, bestValue);
-                if (bestValue == currentValue) {
+                if (currentValue > bestValue) {
+                    bestValue = currentValue;
+                    bestDepth = n.getMaxDepth();
+                    node.getState().setBestMove(n.getState().getPrevMove());
+                }
+                if (currentValue == bestValue && n.getMaxDepth() < bestDepth) {
+                    bestDepth = n.getMaxDepth();
+                    bestValue = currentValue;
                     node.getState().setBestMove(n.getState().getPrevMove());
                 }
             }
@@ -42,8 +49,14 @@ public class MinMaxPlayer extends PlayerController {
             int currentValue;
             for (Node n: node.getChildren()) {
                 currentValue = minimax(n, depth - 1, true);
-                bestValue = Math.min(currentValue, bestValue);
-                if (bestValue == currentValue) {
+                if (currentValue < bestValue) {
+                    bestValue = currentValue;
+                    bestDepth = n.getMaxDepth();
+                    node.getState().setBestMove(n.getState().getPrevMove());
+                }
+                if (currentValue == bestValue && n.getMaxDepth() < bestDepth) {
+                    bestDepth = n.getMaxDepth();
+                    bestValue = currentValue;
                     node.getState().setBestMove(n.getState().getPrevMove());
                 }
             }
@@ -144,7 +157,7 @@ public Node min(Node node, int depth){
         // HINT: use the functions on the 'board' object to produce a new board given a specific move
         // HINT: use the functions on the 'heuristic' object to produce evaluations for the different board states!
         
-        State startState = new State(board, 0, -1);
+        State startState = new State(board, this.playerId, -1, this.gameN);
         Tree tree = new Tree(startState);
         tree.createTree(3);
 
