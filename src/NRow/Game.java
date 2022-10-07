@@ -30,7 +30,7 @@ public class Game {
   public void testGame() {
 
     State TestBoard;
-    State state = new State(gameBoard, 0);
+    State state = new State(gameBoard, 0, -1);
     Tree tree = new Tree(state);
     tree.createTree(3);
 
@@ -81,6 +81,12 @@ public class Game {
     while (!this.isOver()) {
       // turn player can make a move
       gameBoard.play(players[currentPlayer].makeMove(gameBoard), players[currentPlayer].playerId);
+      System.out.println(gameBoard);
+      try { 
+        Thread.sleep(2000); 
+      } catch(InterruptedException e) {
+        System.out.println(e);
+      }
       
       // other player can make a move now
       currentPlayer = (currentPlayer == 0) ? 1 : 0;

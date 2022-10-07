@@ -7,9 +7,9 @@ import NRow.Heuristics.SimpleHeuristic;
 import NRow.Heuristics.Heuristic;
 
 public class Node {
-    State state;
-    Node parent;
-    List<Node> children;
+    private State state;
+    private Node parent;
+    private List<Node> children;
 
     public Node (State state, Node parent){
         this.state= state;
@@ -56,7 +56,7 @@ public class Node {
         for (int i = 0; i < parentBoard.width; i++) {
             if (parentBoard.isValid(i)) {
                 newBoard = parentBoard.getNewBoard(i, nextPlayer);
-                newState = new State(newBoard, nextPlayer);
+                newState = new State(newBoard, nextPlayer, i);
                 child = new Node(newState, this);
                 this.children.add(child);
             }
@@ -77,21 +77,22 @@ public class Node {
             for (int i = 0; i < utilities.length; i++) {
                 bestAction = utilities[i] > utilities[bestAction] ? i : bestAction;*/
 
-    public void maximise() {
+    public int getMaxDepth() {
+        int maxDepth = 0;
+        int depth;
+        if (this.children != null) {
+            for (Node n: children) {
+                depth = n.getMaxDepth();
+                if (depth > maxDepth){
+                    maxDepth = depth;
+                }
+            }
 
-        //remove:
-        Heuristic heuristic = new SimpleHeuristic(4);
-
-        if (this.children.size() == 0) {
-            state.setAlpha(heuristic.evaluateBoard(state.getPlayer(), state.getBoard()));
-        }
-        
-        for (int i = 0; i < this.children.size(); i++) {
-
+            return maxDepth + 1;
+            
+        } else {
+            return 0;
         }
     }
 
-    public void minimise() {
-
-    }
 }

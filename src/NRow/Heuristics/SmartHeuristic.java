@@ -17,10 +17,10 @@ public class SmartHeuristic extends SimpleHeuristic {
     protected int evaluate(int player, Board board) {
 
         int opponent = (player == 1) ? 2 : 1;
-        System.out.println(super.evaluate(player, board));
+        //System.out.println(super.evaluate(player, board));
         int val = super.evaluate(opponent, board);
         //System.out.println(super.evaluate((player + 1) % 2, board));
-        System.out.println(val);
+        //System.out.println(val);
         /*posScore = super.evaluate(player, board);
         if (posScore < Integer.MAX_VALUE)
         //negScore = super.evaluate((player + 1) % 2, board);*/
