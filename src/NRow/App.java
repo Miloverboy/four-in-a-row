@@ -43,7 +43,7 @@ public class App {
         PlayerController beta = new AlphaBetaPruning(2, n, 3, heuristic2);
 
         //PlayerController[] players = { human, human2 };
-        PlayerController[] players = { minMax1, minMax2 };
+        PlayerController[] players = { alpha, minMax2 };
 
         return players;
     }

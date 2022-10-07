@@ -23,29 +23,42 @@ public class AlphaBetaPruning extends PlayerController {
     
 
     public int alphaBetaEval (int alpha, int beta, Node node, int depth, boolean max){
+        int currentValue;
         if (depth == 0){
             int eval = heuristic.evaluateBoard(1, node.getState().getBoard());
             return eval;
         }
-        else if (max) {
-            // if you are maximizer, look at all direct children nodes and calculate value based 
-            // on the minimzer's best move 
+        else if (max) { // if you are maximizer, look at all direct children nodes and calculate value based 
+                        // on the minimzer's best move 
             node.createChildren(1);
             List<Node> children = node.getChildren();
             for(Node n:children){
-                alpha= Math.max(alpha,alphaBetaEval(alpha,beta,n,depth-1,false));
-                if (beta <= alpha)
-                    return alpha; 
+                currentValue = alphaBetaEval(alpha,beta,n,depth-1,false);
+                if (currentValue > alpha) {
+                    alpha = currentValue;
+                    // store which child is the best child in the parent node
+                    node.getState().setBestMove(n.getState().getPrevMove()); 
+                    // if beta <= alpha, we don't need to look at the other children
+                    if(beta <= alpha)
+                    return alpha;
+                }
             }
             return alpha;
         }
-        else {
+        else { // if you are minizer, look at all direct children nodes and calculate value based 
+               // on the maximzer's best move
             node.createChildren(1);
             List<Node> children = node.getChildren();
             for(Node n:children){
-                beta= Math.min(beta,alphaBetaEval(alpha,beta,n,depth-1,true));
-                if(beta <= alpha)
+                currentValue = alphaBetaEval(alpha,beta,n,depth-1,true);
+                if (currentValue < beta) {
+                    beta = currentValue;
+                    // store which child is the best child in the parent node
+                    node.getState().setBestMove(n.getState().getPrevMove()); 
+                    // if beta <= alpha, we don't need to look at the other children
+                    if(beta <= alpha)
                     return beta;
+                }
             }
              return beta;
 
@@ -62,25 +75,10 @@ public class AlphaBetaPruning extends PlayerController {
     public int makeMove(Board board) {
         State startState = new State(board, this.playerId, -1, this.gameN);
         Node node = new Node(startState,null);
-        node.createChildren(1);
+        node.createChildren(depth);
         int maxMove=0;
-        int maxValue = 0;
-        int counter =0;
-        List<Node> children = node.getChildren();
-        //Create and put the direct children of the root in a list 
-        for(Node n:children){
-            int eval = alphaBetaEval( Integer.MIN_VALUE, Integer.MAX_VALUE,n, depth -1, false);
-            // check which child is the best based on what the other player (the minimizer)
-            // wants to do (that is why parameter max is set to false)
-            if(eval>=maxValue){
-                //if there is a child that generates a higher value than the max value we have found so 
-                //far, we store it as a new maxValue and our maxMove would becomes the counter which is
-                //equal to the column of the move that would take us to that node
-                maxValue = eval;
-                maxMove = counter;
-            }
-            counter++;
-        }
+        int goal = alphaBetaEval( Integer.MIN_VALUE, Integer.MAX_VALUE, node, depth, true);
+        maxMove = node.getState().getbestMove();
         return maxMove;
 }
 }

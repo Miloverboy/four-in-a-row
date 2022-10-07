@@ -22,10 +22,11 @@ public class MinMaxPlayer extends PlayerController {
     }
 
     public int minimax(Node node, int depth, boolean maximizingPlayer) {
-        int bestDepth = depth;
-        if (depth == 0 || node.getChildren().size() == 0) {
+        // if maximum depth has been reached or a winning state has been reached, 
+        // meaning there are no further children, evaluate the current node.
+        if (depth == 0 || node.getChildren().size() == 0) { 
             return this.heuristic.evaluateBoard(node.getState().getPlayer(), node.getState().getBoard());
-        }
+        } // we want to maximize our score, choose the best child based on minimizers move
         if (maximizingPlayer) {
             int bestValue = Integer.MIN_VALUE + 1000;
             int currentValue;
@@ -33,32 +34,21 @@ public class MinMaxPlayer extends PlayerController {
                 currentValue = minimax(n, depth - 1, false);
                 if (currentValue > bestValue) {
                     bestValue = currentValue;
-                    bestDepth = n.getMaxDepth();
-                    node.getState().setBestMove(n.getState().getPrevMove());
-                }/*
-                if (currentValue == bestValue && n.getMaxDepth() < bestDepth) {
-                    bestDepth = n.getMaxDepth();
-                    bestValue = currentValue;
-                    node.getState().setBestMove(n.getState().getPrevMove());
-                }*/
+                    // store which child is the best child in the parent node
+                    node.getState().setBestMove(n.getState().getPrevMove()); 
+                }
             }
             return bestValue;
-
-        } else {
+        } else { // we want to minimize our score, choose the best child based on maximizers move
             int bestValue = Integer.MAX_VALUE - 1000;
             int currentValue;
             for (Node n: node.getChildren()) {
                 currentValue = minimax(n, depth - 1, true);
                 if (currentValue < bestValue) {
                     bestValue = currentValue;
-                    bestDepth = n.getMaxDepth();
-                    node.getState().setBestMove(n.getState().getPrevMove());
+                    // store which child is the best child in the parent node
+                    node.getState().setBestMove(n.getState().getPrevMove()); 
                 }
-                /*if (currentValue == bestValue && n.getMaxDepth() < bestDepth) {
-                    bestDepth = n.getMaxDepth();
-                    bestValue = currentValue;
-                    node.getState().setBestMove(n.getState().getPrevMove());
-                }*/
             } 
             return bestValue;
         }
