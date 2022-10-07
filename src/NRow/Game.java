@@ -57,26 +57,23 @@ public class Game {
     //tTree.createChildren();
   }
 
+  public void testGame2() {
+    State state = new State(gameBoard, 0, -1, 4);
+    Tree tree = new Tree(state);
+    tree.createTree(4);
     
-    /*Node node = new Node(state, null);
+    final long startTime1 = System.nanoTime();
+    for (int i = 0; i < 100; i++) {
+      players[0].makeMove(gameBoard);
+    }
+    System.out.println("alpha/beta : " + players[0].getEvalCount()/100 + ", " + (System.nanoTime() - startTime1)/100000);
 
-    node.createChildren();
-    node = node.getChildren().get(0);
-
-    node.createChildren();
-    node = node.getChildren().get(3);
-
-    node.createChildren();
-    node = node.getChildren().get(6);
-
-    node.createChildren();
-    node = node.getChildren().get(1);
-
-    node.createChildren();
-    node = node.getChildren().get(1);
-    
-    System.out.println(node.getState().getBoard()); 
-  } */
+    final long startTime2 = System.nanoTime();
+    for (int i = 0; i < 100; i++) {
+      players[1].makeMove(gameBoard);
+    }
+    System.out.println("minMax : " + players[1].getEvalCount()/100 + ", " + (System.nanoTime() - startTime2)/100000);
+  }
 
   /**
    * Starts the game
@@ -91,7 +88,7 @@ public class Game {
       gameBoard.play(players[currentPlayer].makeMove(gameBoard), players[currentPlayer].playerId);
       System.out.println(gameBoard);
       try { 
-        Thread.sleep(00); 
+        Thread.sleep(500); 
       } catch(InterruptedException e) {
         System.out.println(e);
       }

@@ -17,7 +17,7 @@ public class App {
 
         Game game = new Game(gameN, boardWidth, boardHeight, players);
         game.startGame();
-        //game.testGame();
+        //game.testGame2();
     }
 
     /**
@@ -33,17 +33,17 @@ public class App {
         SmartHeuristic smHeuristic2 = new SmartHeuristic(n);
 
         PlayerController human = new HumanPlayer(1, n, heuristic1);
-        PlayerController human2 = new HumanPlayer(2, n, heuristic2);
+        PlayerController human2 = new HumanPlayer(2, n, smHeuristic2);
 
         PlayerController minMax1 = new MinMaxPlayer(1, n, 3, heuristic1);
-        PlayerController minMax2 = new MinMaxPlayer(2, n, 3, heuristic2);
+        PlayerController minMax2 = new MinMaxPlayer(2, n, 3, smHeuristic2);
 
         //TODO: Implement other PlayerControllers (MinMax, AlphaBeta)
         PlayerController alpha = new AlphaBetaPruning(1, n, 3, heuristic1);
-        PlayerController beta = new AlphaBetaPruning(2, n, 3, heuristic2);
+        PlayerController beta = new AlphaBetaPruning(2, n, 3, smHeuristic2);
 
-        //PlayerController[] players = { human, human2 };
-        PlayerController[] players = { alpha, minMax2 };
+        PlayerController[] players = { alpha, human2 };
+
 
         return players;
     }

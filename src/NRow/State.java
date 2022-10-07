@@ -6,16 +6,12 @@ public class State {
     int gameN;
     Board board;
     int player;
-    int alpha;
-    int beta;
     int prevMove;
     int bestMove;
 
     public State (Board board, int player, int prevMove, int gameN){
         this.board= board;
         this.player= player;
-        this.alpha= MIN_VALUE;
-        this.beta= MAX_VALUE;
         this.prevMove = prevMove;
     }
 
@@ -25,22 +21,6 @@ public class State {
 
     public int getPlayer() {
         return player;
-    }
-
-    public void setAlpha(int alpha){
-        this.alpha = alpha;
-    }
-
-    public void setBeta(int beta){
-        this.beta = beta;
-    }
-
-    public int getAlpha(){
-        return this.alpha;
-    }
-
-    public int getBeta(){
-        return this.beta;
     }
 
     public void setBestMove(int i) {

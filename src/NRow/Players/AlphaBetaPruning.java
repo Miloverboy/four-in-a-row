@@ -1,14 +1,11 @@
 package NRow.Players;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import NRow.Board;
 import NRow.Heuristics.Heuristic;
-import NRow.Heuristics.SimpleHeuristic;
 import NRow.Node;
 import NRow.State;
-import NRow.Tree;
 
 public class AlphaBetaPruning extends PlayerController {
     private int depth;
@@ -30,7 +27,6 @@ public class AlphaBetaPruning extends PlayerController {
         }
         else if (max) { // if you are maximizer, look at all direct children nodes and calculate value based 
                         // on the minimzer's best move 
-            node.createChildren(1);
             List<Node> children = node.getChildren();
             for(Node n:children){
                 currentValue = alphaBetaEval(alpha,beta,n,depth-1,false);
@@ -47,7 +43,6 @@ public class AlphaBetaPruning extends PlayerController {
         }
         else { // if you are minizer, look at all direct children nodes and calculate value based 
                // on the maximzer's best move
-            node.createChildren(1);
             List<Node> children = node.getChildren();
             for(Node n:children){
                 currentValue = alphaBetaEval(alpha,beta,n,depth-1,true);
@@ -61,9 +56,7 @@ public class AlphaBetaPruning extends PlayerController {
                 }
             }
              return beta;
-
         }
-
     }
 
     /**

@@ -22,13 +22,9 @@ public class SimpleHeuristic extends Heuristic {
         int[][] boardState = board.getBoardState();
         int winning = Game.winning(boardState, this.gameN);
         if(winning == player) {
-            //System.out.println(board);
-            //System.out.println(player);
-            return Integer.MAX_VALUE - 100;
+            return Integer.MAX_VALUE;
         } else if(winning != 0) {
-            //System.out.println(board);
-            //System.out.println("not " + player);
-            return Integer.MIN_VALUE + 100;
+            return Integer.MIN_VALUE;
         }
 
         /*

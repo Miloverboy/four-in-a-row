@@ -74,28 +74,5 @@ public class Node {
         }  
     }
 
-    /*
-            int[] utilities = evalActions(player, board);
-            int bestAction = 0;
-            for (int i = 0; i < utilities.length; i++) {
-                bestAction = utilities[i] > utilities[bestAction] ? i : bestAction;*/
-
-    public int getMaxDepth() {
-        int maxDepth = 0;
-        int depth;
-        if (this.children != null) {
-            for (Node n: children) {
-                depth = n.getMaxDepth();
-                if (depth > maxDepth){
-                    maxDepth = depth;
-                }
-            }
-
-            return maxDepth + 1;
-            
-        } else {
-            return 0;
-        }
-    }
 
 }

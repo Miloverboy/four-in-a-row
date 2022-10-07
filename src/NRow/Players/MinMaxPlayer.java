@@ -66,53 +66,12 @@ public class MinMaxPlayer extends PlayerController {
         // HINT: use the functions on the 'heuristic' object to produce evaluations for the different board states!
         
         State startState = new State(board, this.playerId, -1, this.gameN);
-        Tree tree = new Tree(startState);
-        tree.createTree(3);
-
-        // Example: 
-        int maxMove = 0;
-        int maxValue =0;
-        int counter =0;
-        Node node = tree.getRoot();
-
         //Create children of a node based on the current board
-        // If no moves have been made, then it means that player 1 (the maximiser will start)
-
+        Tree tree = new Tree(startState);
+        tree.createTree(depth);
+        Node node = tree.getRoot();
         int goal = minimax(node, depth, true);
-        maxMove = node.getState().getbestMove();
-        System.out.println(goal);
-        
-        //System.out.println(goal);
-
-        /*
-        if (this.playerId == 0){
-            for(Node n: children){
-                //check for the best child and make the move based that
-                int eval= min(n.getState().getBoard(),depth);
-                if (eval>maxValue){
-                    eval=maxValue; 
-                    maxMove=counter;
-                }
-                counter++;
-            }
-        }
-        // If an even number of moves have been made, then it means that player 1 (the maximiser will play a move)
-        else if (this.playerId == 1){
-            for(Node n: children){
-                int eval= min(n.getState().getBoard(),depth);
-                if (eval>maxValue){
-                    eval=maxValue; 
-                    maxMove=counter;
-                }
-                counter++;
-            }
-        } */
-        /*
-        This is obviously not enough (this is depth 1)
-        Your assignment is to create a data structure (tree) to store the gameboards such that you can evaluate a higher depths.
-        Then, use the minmax algorithm to search through this tree to find the best move/action to take!
-        */
-
+        int maxMove = node.getState().getbestMove();
         return maxMove;
     }
     
